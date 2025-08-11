@@ -13,6 +13,9 @@ RSpec.describe "Users", type: :request do
       5.times do
         create(:user, company: company_2)
       end
+
+      #adicionar outro teste um usuario pra buscar prefixo parcial
+      create(:user, username: 'testelude')
     end
   end
 
@@ -33,8 +36,12 @@ RSpec.describe "Users", type: :request do
     context 'when fetching all users' do
       include_context 'with multiple companies'
 
-      it 'returns all the users' do
+      it 'return users by username' do
 
+        get users_path(username: 'testelude')
+
+        
+        expect(result.size).to eq(1)
       end
     end
   end
